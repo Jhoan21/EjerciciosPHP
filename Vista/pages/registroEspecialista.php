@@ -55,11 +55,11 @@
                                     <div class="form-group">
 
                                         <label>Nombres</label>
-                                        <input required maxlength="60" id="Nombres" name="Nombres" minlength="2" class="form-control" placeholder="Ingrese Sus Nombres Completos">
+                                        <input required maxlength="60" id="Nombre" name="Nombre" minlength="2" class="form-control" placeholder="Ingrese Sus Nombre Completos">
                                     </div>
                                     <div class="form-group">
                                         <label>Apellidos</label>
-                                        <input required maxlength="60" id="Apellidos" name="Apellidos" minlength="2" class="form-control" placeholder="Ingrese Sus Apellidos Completos">
+                                        <input required maxlength="60" id="Apellido" name="Apellido" minlength="2" class="form-control" placeholder="Ingrese Sus Apellidos Completos">
                                     </div>
                                     <div class="form-group">
                                         <label>Direccion</label>

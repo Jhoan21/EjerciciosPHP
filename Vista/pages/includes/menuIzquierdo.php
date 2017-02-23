@@ -15,8 +15,19 @@
                         <li>
                             <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
+
+
                         <li>
-                            <a href="registroPaciente.php"><i class="fa fa-user fa-fw"></i> Registro Pacientes</a>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> Pacientes<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="registroPaciente.php">Registrar</a>
+                                </li>
+                                <li>
+                                    <a href="adminPacientes.php">Administrar</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="registroEspecialista.php"><i class="fa fa-user fa-fw"></i> Registro Especialista</a>

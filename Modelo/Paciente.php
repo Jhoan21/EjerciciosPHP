@@ -12,10 +12,10 @@ class Paciente extends db_abstract_class
 {
 
     private $idPaciente;
-    private $Nombre;
+    private $Nombres;
     private $Apellidos;
-    private $Documento;
     private $TipoDocumento;
+    private $Documento;
     private $Direccion;
     private $Email;
     private $Genero;
@@ -30,10 +30,10 @@ class Paciente extends db_abstract_class
             }
         }else {
             $this->idPaciente = "";
-            $this->Nombre = "";
+            $this->Nombres = "";
             $this->Apellidos = "";
-            $this->Documento = "";
             $this->TipoDocumento = "";
+            $this->Documento = "";
             $this->Direccion = "";
             $this->Email = "";
             $this->Genero = "";
@@ -66,17 +66,17 @@ class Paciente extends db_abstract_class
     /**
      * @return mixed
      */
-    public function getNombre()
+    public function getNombres()
     {
-        return $this->Nombre;
+        return $this->Nombres;
     }
 
     /**
      * @param mixed $Nombres
      */
-    public function setNombre($Nombres)
+    public function setNombres($Nombres)
     {
-        $this->Nombre = $Nombres;
+        $this->Nombres = $Nombres;
     }
 
     /**
@@ -98,22 +98,6 @@ class Paciente extends db_abstract_class
     /**
      * @return mixed
      */
-    public function getDocumento()
-    {
-        return $this->Documento;
-    }
-
-    /**
-     * @param mixed $Documento
-     */
-    public function setDocumento($Documento)
-    {
-        $this->Documento = $Documento;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getTipoDocumento()
     {
         return $this->TipoDocumento;
@@ -125,6 +109,22 @@ class Paciente extends db_abstract_class
     public function setTipoDocumento($TipoDocumento)
     {
         $this->TipoDocumento = $TipoDocumento;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDocumento()
+    {
+        return $this->Documento;
+    }
+
+    /**
+     * @param mixed $Documento
+     */
+    public function setDocumento($Documento)
+    {
+        $this->Documento = $Documento;
     }
 
     /**
@@ -197,10 +197,10 @@ class Paciente extends db_abstract_class
         if ($id > 0){
             $getrow = $pacien->getRow("SELECT * FROM odontologos.paciente WHERE idPaciente =?", array($id));
             $pacien->idPaciente = $getrow['idPaciente'];
-            $pacien->Nombre = $getrow['Nombre'];
+            $pacien->Nombres = $getrow['Nombres'];
             $pacien->Apellidos = $getrow['Apellidos'];
-            $pacien->Documento = $getrow['Documento'];
             $pacien->TipoDocumento = $getrow['TipoDocumento'];
+            $pacien->Documento = $getrow['Documento'];
             $pacien->Direccion = $getrow['Direccion'];
             $pacien->Email = $getrow['Email'];
             $pacien->Genero = $getrow['Genero'];
@@ -221,10 +221,10 @@ class Paciente extends db_abstract_class
         foreach ($getrows as $valor) {
             $pacien = new Paciente();
             $pacien->idPaciente = $valor['idPaciente'];
-            $pacien->Nombre = $valor['Nombre'];
+            $pacien->Nombres = $valor['Nombres'];
             $pacien->Apellidos = $valor['Apellidos'];
-            $pacien->Documento = $valor['Documento'];
             $pacien->TipoDocumento = $valor['TipoDocumento'];
+            $pacien->Documento = $valor['Documento'];
             $pacien->Direccion = $valor['Direccion'];
             $pacien->Email = $valor['Email'];
             $pacien->Genero = $valor['Genero'];
@@ -242,11 +242,11 @@ class Paciente extends db_abstract_class
 
     public function insertar()
     {
-        $this->insertRow("INSERT INTO odontologos.paciente VALUES ('NULL', ?, ?, ?, ?, ?, ?, ?, ?)", array(
-                $this->Nombre,
+        $this->insertRow("INSERT INTO odontologos.paciente VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)", array(
+                $this->Nombres,
                 $this->Apellidos,
-                $this->Documento,
                 $this->TipoDocumento,
+                $this->Documento,
                 $this->Direccion,
                 $this->Email,
                 $this->Genero,
@@ -260,16 +260,16 @@ class Paciente extends db_abstract_class
     {
 
         $arrUser = (array) $this;
-        $this->updateRow("UPDATE odontologos.paciente SET Nombre = ?, Apellidos = ?, Documento = ?, TipoDocumento = ?, Direccion = ?, Email = ?, Genero = ?, Estado = ? WHERE idPaciente = ?", array(
-            $this->idPaciente,
-            $this->Nombre,
+        $this->updateRow("UPDATE odontologos.paciente SET Nombres = ?, Apellidos = ?, TipoDocumento = ?, Documento = ?, Direccion = ?, Email = ?, Genero = ?, Estado = ? WHERE idPaciente = ?", array(
+            $this->Nombres,
             $this->Apellidos,
-            $this->Documento,
             $this->TipoDocumento,
+            $this->Documento,
             $this->Direccion,
             $this->Email,
             $this->Genero,
-            $this->Estado
+            $this->Estado,
+            $this->idPaciente
         ));
         $this->Disconnect();
 

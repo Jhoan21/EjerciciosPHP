@@ -16,3 +16,15 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
+
+    <!-- Page-Level Demo Scripts - Notifications - Use for reference -->
+    <script>
+        // tooltip demo
+        $('.newTooltip').tooltip({
+
+        })
+
+        $(".alert-dismissable").click(function (e) {
+            $(this).fadeOut('slow');
+        });
+    </script>

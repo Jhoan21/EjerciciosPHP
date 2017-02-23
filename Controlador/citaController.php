@@ -34,9 +34,9 @@ class citaController{
             $arrayCita['idEspecialista'] = $_POST['idEspecialista'];
             $cita = new Cita($arrayCita);
             $cita->insertar();
-            header("Location: ../Vista/registroCita.php?respuesta=correcto");
+            header("Location: ../Vista/pages/registroCita.php?respuesta=correcto");
         } catch (Exception $e) {
-            header("Location: ../Vista/registroCita.php?respuesta=error");
+            header("Location: ../Vista/pages/registroCita.php?respuesta=error");
         }
     }
     /*

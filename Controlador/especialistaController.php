@@ -24,8 +24,8 @@ class EspecialistaController{
         try {
             $arrayEspecialista = array();
             $arrayEspecialista['Tipo'] = $_POST['Tipo'];
-            $arrayEspecialista['Nombres'] = $_POST['Nombres'];
-            $arrayEspecialista['Apellidos'] = $_POST['Apellidos'];
+            $arrayEspecialista['Nombre'] = $_POST['Nombre'];
+            $arrayEspecialista['Apellido'] = $_POST['Apellido'];
             $arrayEspecialista['Direccion'] = $_POST['Direccion'];
             $arrayEspecialista['TipoDocumento'] = $_POST['TipoDocumento'];
             $arrayEspecialista['Documento'] = $_POST['Documento'];
@@ -34,17 +34,29 @@ class EspecialistaController{
             $arrayEspecialista['Telefono'] = $_POST['Telefono'];
             $Especialista = new Especialista ($arrayEspecialista);
             $Especialista->insertar();
-           //header("Location: ../Vista/registroEspecialista.php?respuesta=correcto");
+            header("Location: ../Vista/pages/registroEspecialista.php?respuesta=correcto");
         } catch (Exception $e) {
-           //header("Location: ../Vista/registroEspecialista.php?respuesta=error");
-           var_dump("Location: ../Vista/registroEspecialista.php?respuesta=error");
+           header("Location: ../Vista/pages/registroEspecialista.php?respuesta=error");
         }
     }
+
+    static public function selectEspecialista ($isRequired=true, $id="idEspecialista", $nombre="idEspecialista", $class=""){
+        $arrEspecialistas = Especialista::getAll(); /*  */
+        $htmlSelect = "<select ".(($isRequired) ? "required" : "")." id= '".$id."' name='".$nombre."' class='".$class."'>";
+        $htmlSelect .= "<option >Seleccione</option>";
+        if(count($arrEspecialistas) > 0){
+            foreach ($arrEspecialistas as $especialista)
+                $htmlSelect .= "<option value='".$especialista->getIdEspecialista()."'>".$especialista->getNombre()." ".$especialista->getApellido()."</option>";
+        }
+        $htmlSelect .= "</select>";
+        return $htmlSelect;
+    }
+
     /*
     static public function editar (){
         try {
             $arrayOdonto = array();
-            $arrayOdonto['nombres'] = $_POST['nombres'];
+            $arrayOdonto['nombre'] = $_POST['nombre'];
             $arrayOdonto['apellidos'] = $_POST['apellidos'];
             $arrayOdonto['especialidad'] = $_POST['especialidad'];
             $arrayOdonto['direccion'] = $_POST['direccion'];

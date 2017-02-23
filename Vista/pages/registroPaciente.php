@@ -37,11 +37,27 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
+
+                                <div id="alertas">
+                                    <?php if(!empty($_GET["respuesta"]) && $_GET["respuesta"] == "correcto"){ ?>
+                                        <div class="alert alert-success alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                            La informacion del paciente se ha registrado correctamente. Puede administrar los pacientes desde <a href="adminPacientes.php" class="alert-link">Aqui</a> .
+                                        </div>
+                                    <?php } ?>
+                                    <?php if(!empty($_GET["respuesta"]) && $_GET["respuesta"] == "error"){ ?>
+                                        <div class="alert alert-danger alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                            No se pudo registrar al paciente. <a href="#" class="alert-link">Error: <?php echo $_GET["Mensaje"] ?></a> .
+                                        </div>
+                                    <?php } ?>
+                                </div>
+
                                 <div class="col-lg-12">
                                     <form role="form" method="post" action="../../Controlador/pacienteController.php?action=crear">
                                         <div class="form-group">
                                             <label>Nombres</label>
-                                            <input required maxlength="60" id="Nombre" name="Nombre" minlength="2" class="form-control" placeholder="Ingrese Sus Nombres Completos">
+                                            <input required data-toggle="tooltip" title="Sin Signos de puntuación o caracteres especiales" data-placement="top" maxlength="60" id="Nombres" name="Nombres" minlength="2" class="form-control newTooltip" placeholder="Ingrese Sus Nombres Completos">
                                         </div>
                                         <div class="form-group">
                                             <label>Apellidos</label>
