@@ -17,6 +17,8 @@ class pacienteController{
             pacienteController::editar();
         }else if ($action == "selectPacientes"){
             pacienteController::selectPacientes();
+        }else if ($action == "adminTablePacientes"){
+            pacienteController::adminTablePacientes();
         }
         /*else if ($action == "buscarID"){
             pacienteController::buscarID(1);
@@ -75,6 +77,35 @@ class pacienteController{
         $htmlSelect .= "</select>";
         return $htmlSelect;
     }
+
+    static public function adminTablePacientes (){
+        $arrPacientes = Paciente::getAll(); /*  */
+        $tmpPaciente = new Paciente();
+        $arrColumnas = ["idPaciente","Nombres","Apellidos","TipoDocumento","Documento","Direccion","Email","Genero","Estado"];
+        $htmlTable = "<thead>";
+            $htmlTable .= "<tr>";
+                foreach ($arrColumnas as $NameColumna){
+                    $htmlTable .= "<th>".$NameColumna."</th>";
+                }
+            $htmlTable .= "</tr>";
+        $htmlTable .= "</thead>";
+
+        $htmlTable .= "<tbody>";
+        foreach ($arrPacientes as $ObjPaciente){
+            $htmlTable .= "<tr>";
+                $htmlTable .= "<td>".$ObjPaciente->idPaciente."</td>";
+                $htmlTable .= "<td>".$ObjPaciente->Nombres."</td>";
+                $htmlTable .= "<td>".$ObjPaciente->Apellidos."</td>";
+                $htmlTable .= "<td>".$ObjPaciente->TipoDocumento."</td>";
+                $htmlTable .= "<td>".$ObjPaciente->Documento."</td>";
+                $htmlTable .= "<td>".$ObjPaciente->Nombres."</td>";
+                $htmlTable .= "<td>".$ObjPaciente->Nombres."</td>";
+            $htmlTable .= "</tr>";
+        }
+        return $htmlTable;
+    }
+
+
 
 
     /*

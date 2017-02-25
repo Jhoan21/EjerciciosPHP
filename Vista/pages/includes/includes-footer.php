@@ -17,14 +17,24 @@
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
+    <!-- DataTables JavaScript -->
+    <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+
     <!-- Page-Level Demo Scripts - Notifications - Use for reference -->
     <script>
         // tooltip demo
-        $('.newTooltip').tooltip({
 
-        })
+        $(document).ready(function() {
 
-        $(".alert-dismissable").click(function (e) {
-            $(this).fadeOut('slow');
+            $('#dataTables-example').DataTable({
+                responsive: true,
+                language: {
+                 "url": "../js/dataTablesSpanish.json"
+                },
+            });
+
         });
+
     </script>
