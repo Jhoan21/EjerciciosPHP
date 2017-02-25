@@ -26,6 +26,10 @@
     <script>
         // tooltip demo
 
+        $('.newTooltip').tooltip({
+
+        });
+
         $(document).ready(function() {
 
             $('#dataTables-example').DataTable({

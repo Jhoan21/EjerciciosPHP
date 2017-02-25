@@ -81,27 +81,40 @@ class pacienteController{
     static public function adminTablePacientes (){
         $arrPacientes = Paciente::getAll(); /*  */
         $tmpPaciente = new Paciente();
-        $arrColumnas = ["idPaciente","Nombres","Apellidos","TipoDocumento","Documento","Direccion","Email","Genero","Estado"];
+        $arrColumnas = [/*"idPaciente",*/"Nombres","Apellidos",/*"TipoDocumento",*/"Documento","Direccion","Email","Genero","Estado"];
         $htmlTable = "<thead>";
             $htmlTable .= "<tr>";
                 foreach ($arrColumnas as $NameColumna){
                     $htmlTable .= "<th>".$NameColumna."</th>";
                 }
+            $htmlTable .= "<th>Acciones</th>";
             $htmlTable .= "</tr>";
         $htmlTable .= "</thead>";
 
         $htmlTable .= "<tbody>";
         foreach ($arrPacientes as $ObjPaciente){
             $htmlTable .= "<tr>";
-                $htmlTable .= "<td>".$ObjPaciente->idPaciente."</td>";
-                $htmlTable .= "<td>".$ObjPaciente->Nombres."</td>";
-                $htmlTable .= "<td>".$ObjPaciente->Apellidos."</td>";
-                $htmlTable .= "<td>".$ObjPaciente->TipoDocumento."</td>";
-                $htmlTable .= "<td>".$ObjPaciente->Documento."</td>";
-                $htmlTable .= "<td>".$ObjPaciente->Nombres."</td>";
-                $htmlTable .= "<td>".$ObjPaciente->Nombres."</td>";
+                //$htmlTable .= "<td>".$ObjPaciente->getIdPaciente()."</td>";
+                $htmlTable .= "<td>".$ObjPaciente->getNombres()."</td>";
+                $htmlTable .= "<td>".$ObjPaciente->getApellidos()."</td>";
+                //$htmlTable .= "<td>".$ObjPaciente->getTipoDocumento()."</td>";
+                $htmlTable .= "<td>".$ObjPaciente->getDocumento()."</td>";
+                $htmlTable .= "<td>".$ObjPaciente->getDireccion()."</td>";
+                $htmlTable .= "<td>".$ObjPaciente->getEmail()."</td>";
+                $htmlTable .= "<td>".$ObjPaciente->getGenero()."</td>";
+                $htmlTable .= "<td>".$ObjPaciente->getEstado()."</td>";
+
+                $icons = "";
+                if($ObjPaciente->getEstado() == "Activo"){
+                    $icons .= "<a data-toggle=\"tooltip\" title=\"Sin Signos de puntuación o caracteres especiales\" data-placement=\"top\" class=\"btn btn-social-icon btn-danger newTooltip\" href='pacienteController.php'><i class=\"fa fa-times\"></i></a>";
+                }else{
+                    $icons .= "<a class=\"btn btn-social-icon btn-success\" href='pacienteController.php'><i class=\"fa fa-bitbucket\"></i></a>";
+                }
+
+                $htmlTable .= "<td>".$icons."</td>";
             $htmlTable .= "</tr>";
         }
+        $htmlTable .= "</tbody>";
         return $htmlTable;
     }
 
