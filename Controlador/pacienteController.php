@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once (__DIR__.'/../Modelo/Paciente.php');
 
 if(!empty($_GET['action'])){
@@ -19,6 +19,10 @@ class pacienteController{
             pacienteController::selectPacientes();
         }else if ($action == "adminTablePacientes"){
             pacienteController::adminTablePacientes();
+        }else if ($action == "InactivarPaciente"){
+            pacienteController::CambiarEstado("Inactivo");
+        }else if ($action == "ActivarPaciente"){
+            pacienteController::CambiarEstado("Activo");
         }
         /*else if ($action == "buscarID"){
             pacienteController::buscarID(1);
@@ -47,6 +51,8 @@ class pacienteController{
 
     static public function editar (){
         try {
+            $TmpObject = Paciente::buscarForId($_SESSION["IdPaciente"]);
+            $Estado = $TmpObject->getEstado();
             $arrayPaciente = array();
             $arrayPaciente['Nombres'] = $_POST['Nombres'];
             $arrayPaciente['Apellidos'] = $_POST['Apellidos'];
@@ -55,14 +61,30 @@ class pacienteController{
             $arrayPaciente['Direccion'] = $_POST['Direccion'];
             $arrayPaciente['Email'] = $_POST['Email'];
             $arrayPaciente['Genero'] = $_POST['Genero'];
-            $arrayPaciente['Estado'] = $_POST['Estado'];
-            $arrayPaciente['idPaciente'] = $_POST['idPaciente'];
+            $arrayPaciente['Estado'] = $Estado;
+            $arrayPaciente['idPaciente'] = $_SESSION["IdPaciente"];
             $paciente = new Paciente ($arrayPaciente);
+            var_dump($arrayPaciente);
             $paciente->editar();
-            header("Location: ../Vista/pages/registroPaciente.php?respuesta=correcto");
+            unset($_SESSION["IdPaciente"]);
+            header("Location: ../Vista/pages/actualizarPaciente.php?respuesta=correcto&IdPaciente=".$arrayPaciente['idPaciente']);
         } catch (Exception $e) {
             $txtMensaje = $e->getMessage();
-            header("Location: ../Vista/pages/registroPaciente.php?respuesta=error&Mensaje=".$txtMensaje);
+            header("Location: ../Vista/pages/actualizarPaciente.php?respuesta=error&Mensaje=".$txtMensaje);
+        }
+    }
+
+    static public function CambiarEstado ($Estado){
+        try {
+            $idPaciente = $_GET["IdPaciente"];
+            $ObjPaciente = Paciente::buscarForId($idPaciente);
+            $ObjPaciente->setEstado($Estado);
+            var_dump($ObjPaciente);
+            $ObjPaciente->editar();
+            header("Location: ../Vista/pages/adminPacientes.php?respuesta=correcto");
+        }catch (Exception $e){
+            $txtMensaje = $e->getMessage();
+            header("Location: ../Vista/pages/adminPacientes.php?respuesta=error&Mensaje=".$txtMensaje);
         }
     }
 
@@ -106,10 +128,12 @@ class pacienteController{
 
                 $icons = "";
                 if($ObjPaciente->getEstado() == "Activo"){
-                    $icons .= "<a data-toggle=\"tooltip\" title=\"Sin Signos de puntuación o caracteres especiales\" data-placement=\"top\" class=\"btn btn-social-icon btn-danger newTooltip\" href='pacienteController.php'><i class=\"fa fa-times\"></i></a>";
+                    $icons .= "<a data-toggle='tooltip' title='Inactivar Usuario' data-placement='top' class='btn btn-social-icon btn-danger newTooltip' href='../../Controlador/pacienteController.php?action=InactivarPaciente&IdPaciente=".$ObjPaciente->getIdPaciente()."'><i class='fa fa-times'></i></a>";
                 }else{
-                    $icons .= "<a class=\"btn btn-social-icon btn-success\" href='pacienteController.php'><i class=\"fa fa-bitbucket\"></i></a>";
+                    $icons .= "<a data-toggle='tooltip' title='Activar Usuario' data-placement='top' class='btn btn-social-icon btn-success newTooltip' href='../../Controlador/pacienteController.php?action=ActivarPaciente&IdPaciente=".$ObjPaciente->getIdPaciente()."'><i class='fa fa-check'></i></a>";
                 }
+                $icons .= "<a data-toggle='tooltip' title='Actualizar Usuario' data-placement='top' class='btn btn-social-icon btn-primary newTooltip' href='actualizarPaciente.php?IdPaciente=".$ObjPaciente->getIdPaciente()."'><i class='fa fa-pencil'></i></a>";
+                $icons .= "<a data-toggle='tooltip' title='Ver Usuario' data-placement='top' class='btn btn-social-icon btn-warning newTooltip' href='../../Controlador/pacienteController.php?action=InactivarPaciente&IdPaciente=".$ObjPaciente->getIdPaciente()."'><i class='fa fa-eye'></i></a>";
 
                 $htmlTable .= "<td>".$icons."</td>";
             $htmlTable .= "</tr>";

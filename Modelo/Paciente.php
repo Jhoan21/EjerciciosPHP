@@ -258,7 +258,6 @@ class Paciente extends db_abstract_class
 
     public function editar()
     {
-
         $arrUser = (array) $this;
         $this->updateRow("UPDATE odontologos.paciente SET Nombres = ?, Apellidos = ?, TipoDocumento = ?, Documento = ?, Direccion = ?, Email = ?, Genero = ?, Estado = ? WHERE idPaciente = ?", array(
             $this->Nombres,

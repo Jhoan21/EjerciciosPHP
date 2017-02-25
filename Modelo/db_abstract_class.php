@@ -70,6 +70,9 @@ abstract class db_abstract_class {
     //$insertrow = $database ->insertRow("INSERT INTO users (username, email) VALUES (?, ?)", array("Diego", "yusaf@email.com"));
     public function insertRow($query, $params){
         try{
+            if (is_null($this->datab)){
+                $this->__construct();
+            }
             $stmt = $this->datab->prepare($query);
             $stmt->execute($params);
         }catch(PDOException $e){
