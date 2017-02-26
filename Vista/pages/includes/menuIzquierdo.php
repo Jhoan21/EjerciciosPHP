@@ -30,7 +30,26 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="registroEspecialista.php"><i class="fa fa-user fa-fw"></i> Registro Especialista</a>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> Registro Especialista</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="registroEspecialista.php">Registrar</a>
+                                </li>
+                                <li>
+                                    <a href="adminEspecialista.php">Administrar</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> Registro Cita</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="registroCita.php">Registrar</a>
+                                </li>
+                                <li>
+                                    <a href="adminCita.php">Administrar</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>

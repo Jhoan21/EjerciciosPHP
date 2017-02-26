@@ -65,9 +65,9 @@ require "../../Modelo/Paciente.php";
                                         No se pudo actualizar al paciente.<strong>Error: no se encontro informacion del paciente.</strong> Puede administrar los pacientes desde <a href="adminPacientes.php" class="alert-link">Aqui</a>.
                                     </div>
                                 <?php }else{
-                                        $IdPaciente = $_GET["IdPaciente"];
-                                        $_SESSION["IdPaciente"] = $IdPaciente;
-                                        $ObjePaciente = Paciente::buscarForId($IdPaciente);
+                                        $idPaciente = $_GET["idPaciente"];
+                                        $_SESSION["idPaciente"] = $idPaciente;
+                                        $ObjePaciente = Paciente::buscarForId($idPaciente);
                                     ?>
                                     <div class="col-lg-12">
                                     <form role="form" method="post" action="../../Controlador/pacienteController.php?action=editar">

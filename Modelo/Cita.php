@@ -202,7 +202,7 @@ class Cita extends db_abstract_class
     }
 
 
-    protected static function buscarForId($id)
+    public static function buscarForId($id)
     {
         $cita = new Cita();
         if ($id > 0){
@@ -248,7 +248,7 @@ class Cita extends db_abstract_class
         return $arrCita;
     }
 
-    protected static function getAll()
+    public static function getAll()
     {
         return Cita::buscar("SELECT * FROM odontologos.cita");
     }
@@ -270,7 +270,7 @@ class Cita extends db_abstract_class
         $this->Disconnect();
     }
 
-    protected function editar()
+    public function editar()
     {
         $arrUser = (array) $this;
         $this->updateRow("UPDATE odontologos.cita SET Fecha = ?, Codigo = ?, Estado = ?, Valor = ?, NConsultorio = ?, Observaciones = ?, Motivo = ?, Paciente_idPaciente = ?, Especialista_idEspecialista = ? WHERE idCita = ?", array(
@@ -296,7 +296,7 @@ class Cita extends db_abstract_class
         return Especialista::buscarForId($this->idEspecialista);
     }
 
-    protected function eliminar($id)
+    public function eliminar($id)
     {
         if ($id > 0){
             return $this->deleteRow("DELETE FROM odontologos.cita WHERE id = ?", array($id));
